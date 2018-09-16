@@ -1,0 +1,13 @@
+{
+  "description": "盒盒盒的小工具们",
+  "setting": {
+    "urlCheck": true,
+    "es6": false,
+    "postcss": false,
+    "minified": false
+  },
+  "compileType": "miniprogram",
+  "appid": "wxba0881da5ae1eb51",
+  "projectname": "y",
+  "miniprogramRoot": "./dist"
+}

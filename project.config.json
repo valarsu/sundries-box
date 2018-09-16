@@ -1,5 +1,5 @@
 {
-  "description": "盒盒盒的小工具们",
+  "description": "盒盒盒的小工具们。",
   "setting": {
     "urlCheck": true,
     "es6": false,
@@ -8,6 +8,6 @@
   },
   "compileType": "miniprogram",
   "appid": "wxba0881da5ae1eb51",
-  "projectname": "y",
+  "projectname": "sundries-box",
   "miniprogramRoot": "./dist"
 }

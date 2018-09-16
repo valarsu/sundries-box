@@ -17,7 +17,8 @@ import 'wepy-async-function'
 export default class extends wepy.app {
   config = {
     pages: [
-      'pages/index'
+      'pages/index',
+      'pages/fitArticle/list'
     ],
     window: {
       backgroundTextStyle: 'light',
@@ -41,11 +42,11 @@ export default class extends wepy.app {
   }
 
   sleep (s) {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve('promise resolved')
-      }, s * 1000)
-    })
+    // return new Promise((resolve, reject) => {
+    //   setTimeout(() => {
+    //     resolve('promise resolved')
+    //   }, s * 1000)
+    // })
   }
 
   async testAsync () {

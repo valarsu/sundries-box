@@ -1,56 +1,71 @@
 <style lang="less">
-  .userinfo {
+  .container {
+    background: #697ede;
+  }
+  .title {
+    padding: 32rpx;
+    color: #fff;
+    font-size: 32rpx;
+  }
+  .mylist {
+    width: 100%;
+    height: 100rpx;
+    line-height: 100rpx;
+    background: #f0f1f5;
+    border-bottom: 2rpx solid #fff;
+    box-sizing: border-box;
+    font-size: 28rpx;
+    color: #697ede;
+    padding: 0 32rpx;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .userinfo-avatar {
-    width: 80rpx;
-    height: 80rpx;
-    border-radius: 50%;
-  }
-
-  .userinfo-nickname {
-    color: #aaa;
+    justify-content: space-between;
   }
 </style>
 <template>
   <view class="container">
-    <view class="userinfo" @tap="handleViewTap">
-      <image class="userinfo-avatar" src="{{ userInfo.avatarUrl }}" background-size="cover"/>
-      <view class="userinfo-nickname">{{ userInfo.nickName }}</view>
-    </view>
-    <list></list>
-    <view class="dddd"></view>
+    <div class="title">
+      包子的文章
+    </div>
+    <!-- 列表 -->
+    <block wx:for-items="{{list}}" wx:for-index="index" wx:for-item="item" wx:key="id">
+      <view @tap="toDetail({{item.id}})" class="mylist">
+        <view>{{item.id}}: {{item.title}}</view>
+        <i class="iconfont icon-right"></i>
+      </view>
+    </block>
   </view>
 </template>
 
 <script>
   import wepy from 'wepy'
-  import List from '../../components/list'
 
   export default class ArticleList extends wepy.page {
 
     config = {
-      navigationBarTitleText: '包子的文章'
+      navigationBarTitleText: '文章列表'
     }
-    components = {
-      list: List
-    }
-
     data = {
       userInfo: {
         nickName: '加载中...'
       },
-      normalTitle: '原始标题'
+      normalTitle: '原始标题',
+      list: [{
+        id: '0',
+        title: 'loading'
+      }, {
+        id: '1',
+        title: '第二章'
+      }]
     }
 
     computed = {
     }
 
     methods = {
-
+      toDetail (id) {
+        console.log(id)
+        wx.redirectTo('/index')
+      }
     }
 
     events = {

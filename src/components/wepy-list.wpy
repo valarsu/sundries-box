@@ -1,55 +1,57 @@
 <style lang="less">
-    .mylist:odd {
-        color: red;
-    }
-    .mylist:even {
-        color: green;
-    }
+  .wepy-list {
+    width: 100%;
+  }
+  .mylist {
+    width: 100%;
+    height: 100rpx;
+    line-height: 100rpx;
+    background: #f0f1f5;
+    border-bottom: 2rpx solid #fff;
+    box-sizing: border-box;
+    font-size: 28rpx;
+    color: #697ede;
+    padding: 0 32rpx;
+    display: flex;
+    justify-content: space-between;
+  }
 </style>
 <template>
-    <view class="wepy-list">
-        <view>
-            <button @tap="add" size="mini">添加列表another</button>
-        </view>
-        <block wx:for-items="{{list}}" wx:for-index="index" wx:for-item="item" wx:key="id">
-            <view @tap="tap" class="mylist">
-                <text>{{item.id}}</text>: {{item.title}}
-            </view>
-        </block>
+  <view class="wepy-list">
+    <block for="{{list}}" index="index" item="item" key="id">
+      <listItem @tapFn.user="toDetail" :itemTitle="item.title" :itemId="item.id">
+        <text slot="title">{{item.id}}: {{item.title}}</text>
+      </listItem>
+    </block>
+    <view @tap="tap" class="mylist">
+      <text>{{itemId}}: {{itemTitle}}</text>
+      <slot name="title"></slot>
+      <i class="iconfont icon-right"></i>
     </view>
+  </view>
 </template>
 <script>
   import wepy from 'wepy'
 
-  export default class ListAnother extends wepy.component {
-    data = {
-      list: [
-        {
-          id: '0',
-          title: 'loading'
-        }
-      ]
+  export default class ListItem extends wepy.component {
+    props = {
+      itemTitle: String,
+      itemId: [Number, String]
     }
 
-    events = {
-      'index-broadcast': (...args) => {
-        let $event = args[args.length - 1]
-        console.log(`${this.$name} receive ${$event.name} from ${$event.source.name}`)
-      }
-    }
+    data = {}
+
+    events = {}
 
     methods = {
       tap () {
-        // this.num = this.num + 1
-        console.log(this.$name + ' tap')
-      },
-      add () {
-        let len = this.list.length
-        this.list.push({id: len + 1, title: 'title_' + len})
+        this.$emit('tapFn', this)
       }
     }
 
     onLoad () {
+      console.log(this.id)
+      console.log(this.title)
     }
   }
 </script>

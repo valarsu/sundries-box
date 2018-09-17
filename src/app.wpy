@@ -1,4 +1,5 @@
 <style lang="less">
+@import '@/assets/icon.less'
 .container {
   height: 100%;
   display: flex;
@@ -7,6 +8,7 @@
   justify-content: space-between;
   box-sizing: border-box;
 }
+
 </style>
 
 <script>
@@ -22,9 +24,9 @@ export default class extends wepy.app {
     ],
     window: {
       backgroundTextStyle: 'light',
-      navigationBarBackgroundColor: '#fff',
+      navigationBarBackgroundColor: '#697ede',
       navigationBarTitleText: 'WeChat',
-      navigationBarTextStyle: 'black'
+      navigationBarTextStyle: 'light'
     }
   }
 

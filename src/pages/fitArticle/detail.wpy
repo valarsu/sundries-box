@@ -1,0 +1,61 @@
+<style lang="less">
+  .container {
+    background: #f0f1f5;
+  }
+  .title {
+    padding: 32rpx;
+    color: #697ede;
+    font-size: 32rpx;
+    text-align: center;
+    margin-bottom: 16px;
+  }
+  .detail {
+    padding: 0 16rpx; 
+  }
+  img {
+    width: 100%;
+  }
+  .pic {
+    width: 100%;
+  }
+</style>
+<template>
+  <view class="container">
+    <!-- 列表 -->
+    <view class="detail">
+      <rich-text class="" nodes="{{detail}}"></rich-text>
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import atcDetail from '../../utils/atcDetail.js'
+
+  export default class ArticleDetail extends wepy.page {
+
+    config = {
+      navigationBarTitleText: '文章详情'
+    }
+    data = {
+      atcId: 1,
+      detail: atcDetail
+    }
+
+    computed = {
+    }
+
+    methods = {
+
+    }
+
+    events = {
+
+    }
+
+    onLoad(options) {
+      let self = this
+      this.atcId = options.atcId
+    }
+  }
+</script>

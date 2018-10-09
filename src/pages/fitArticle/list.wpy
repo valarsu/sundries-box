@@ -6,6 +6,7 @@
     padding: 32rpx;
     color: #fff;
     font-size: 32rpx;
+    text-align: center;
   }
   .mylist {
     width: 100%;
@@ -23,12 +24,12 @@
 </style>
 <template>
   <view class="container">
-    <div class="title">
+    <view class="title">
       包子的文章
-    </div>
+    </view>
     <!-- 列表 -->
     <block wx:for-items="{{list}}" wx:for-index="index" wx:for-item="item" wx:key="id">
-      <view @tap="toDetail({{item.id}})" class="mylist">
+      <view @tap="toDetail('{{item.id}}')" class="mylist">
         <view>{{item.id}}: {{item.title}}</view>
         <i class="iconfont icon-right"></i>
       </view>
@@ -50,11 +51,8 @@
       },
       normalTitle: '原始标题',
       list: [{
-        id: '0',
-        title: 'loading'
-      }, {
         id: '1',
-        title: '第二章'
+        title: '第（1）章'
       }]
     }
 
@@ -63,8 +61,8 @@
 
     methods = {
       toDetail (id) {
-        console.log(id)
-        wx.redirectTo('/index')
+        let atcId = id
+        wx.navigateTo({url: `detail?atcId=${atcId}`})
       }
     }
 

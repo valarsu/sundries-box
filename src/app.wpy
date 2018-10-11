@@ -1,5 +1,5 @@
 <style lang="less">
-@import '@/assets/icon.less'
+@import '@/assets/icon/icon.less'
 .container {
   height: 100%;
   display: flex;
@@ -28,6 +28,19 @@ export default class extends wepy.app {
       navigationBarBackgroundColor: '#697ede',
       navigationBarTitleText: 'WeChat',
       navigationBarTextStyle: 'light'
+    },
+    tabBar: {
+      list: [{
+        pagePath: 'pages/index',
+        text: '打卡',
+        iconPath: 'assets/imgs/clockInRoot.png',
+        selectedIconPath: 'assets/imgs/clockIn.png'
+      }, {
+        pagePath: 'pages/fitArticle/list',
+        text: '文章',
+        iconPath: 'assets/imgs/listRoot.png',
+        selectedIconPath: 'assets/imgs/list.png',
+      }]
     }
   }
 

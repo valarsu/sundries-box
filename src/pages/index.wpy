@@ -1,31 +1,45 @@
 <style lang="less">
   .container {
     background: #f0f1f5;
+    height: 100%;
   }
   .section {
-    padding: 16rpx;
     font-size: 28rpx;
   }
   input {
     background: #fff;
   }
   .clock-in {
-    margin-top: 16rpx;
     background: #697ede;
+    margin: 16rpx;
+  }
+  .picker {
+    width: 100%;
+    height: 72rpx;
+    padding: 0 16rpx;
+    background: #fff;
+    line-height: 72rpx;
+    display: flex;
+    margin-bottom: 16rpx;
+    input {
+      height: 72rpx;
+    }
   }
 </style>
 <template>
   <view class="container">
     <view class="section">
-      <picker @change="bindPickerChange" value="{{index}}" range="{{clockIn}}" range-key="type">
+      <picker @change="bindPickerChange" value="{{currentIdx}}" range="{{clockIn}}" range-key="type">
         <view class="picker">
-          选择项目：{{clockIn[index].type}}
+          今天练啥了？{{clockIn[currentIdx].type}}！
         </view>
       </picker>
       <repeat for="{{clockIn}}" key="idx" index="idx" item="item" wx:if="{{idx == currentIdx}}">
         <repeat for="{{item.data}}" key="subIdx" index="subIdx" item="subItem">
-          <view>{{subItem.name}}</view>
-          <input type="number" placeholder="{{subItem.val}}" @input="bindInput">
+          <view class="picker">
+            <view>{{subItem.name}}：</view>
+            <input type="number" placeholder="{{subItem.val}}" @input="bindInput">
+          </view>
         </repeat>
       </repeat>
       <button type="primary" loading="{{loading}}" plain="{{plain}}" disabled="{{disabled}}" @tap="doClockIn" class="clock-in">锻炼了！</button>
@@ -126,7 +140,6 @@
     }
 
     onLoad() {
-      
     }
   }
 </script>

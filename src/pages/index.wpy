@@ -52,12 +52,15 @@
 
   export default class Index extends wepy.page {
     config = {
-      navigationBarTitleText: '今天锻炼了吗？'
+      navigationBarTitleText: `今天锻炼了吗？`
     }
     components = {
     }
 
     data = {
+      userInfo: {
+        nickName: '加载中...'
+      },
       clockIn: [{
         type: '胸',
         data: [{
@@ -140,6 +143,17 @@
     }
 
     onLoad() {
+      let self = this
+      this.$parent.getUserInfo(function (userInfo) {
+        if (userInfo) {
+          self.userInfo = userInfo
+          wx.setNavigationBarTitle({
+            title: `${self.userInfo.nickName}今天锻炼了吗？`
+          })
+        }
+
+        self.$apply()
+      })
     }
   }
 </script>

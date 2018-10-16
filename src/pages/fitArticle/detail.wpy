@@ -30,7 +30,7 @@
 
 <script>
   import wepy from 'wepy'
-  import atcDetail from '../../utils/atcDetail.js'
+  import { artList } from '../../utils/atcDetail.js'
 
   export default class ArticleDetail extends wepy.page {
 
@@ -38,8 +38,8 @@
       navigationBarTitleText: '文章详情'
     }
     data = {
-      atcId: 1,
-      detail: atcDetail
+      atcId: 0,
+      detail: ''
     }
 
     computed = {
@@ -56,6 +56,7 @@
     onLoad(options) {
       let self = this
       this.atcId = options.atcId
+      this.detail = artList[this.atcId]
     }
   }
 </script>

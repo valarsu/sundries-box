@@ -30,7 +30,7 @@
     <!-- 列表 -->
     <block wx:for-items="{{list}}" wx:for-index="index" wx:for-item="item" wx:key="id">
       <view @tap="toDetail('{{item.id}}')" class="mylist">
-        <view>{{item.id}}: {{item.title}}</view>
+        <view>{{item.id + 1}}: {{item.title}}</view>
         <i class="iconfont icon-right"></i>
       </view>
     </block>
@@ -39,6 +39,7 @@
 
 <script>
   import wepy from 'wepy'
+  import { artTotal } from '../../utils/atcDetail.js'
 
   export default class ArticleList extends wepy.page {
 
@@ -46,14 +47,8 @@
       navigationBarTitleText: '文章列表'
     }
     data = {
-      userInfo: {
-        nickName: '加载中...'
-      },
       normalTitle: '原始标题',
-      list: [{
-        id: '1',
-        title: '第（1）章'
-      }]
+      list: []
     }
 
     computed = {
@@ -72,13 +67,12 @@
 
     onLoad() {
       let self = this
-      this.$parent.getUserInfo(function (userInfo) {
-        if (userInfo) {
-          self.userInfo = userInfo
-        }
-
-        self.$apply()
-      })
+      for (let idx = 0; idx < artTotal; ++idx) {
+        this.list.push({
+          id: idx,
+          title: `第（${idx + 1}）章`
+        })
+      }
     }
   }
 </script>

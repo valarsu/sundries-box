@@ -104,8 +104,20 @@ export default class extends wepy.app {
     // fitness.where({weight: 75}).get().then(res => {
     //   console.log(res)
     // })
-    const _ = db.commond
-    fitness
+    // const _ = db.command
+    // fitness.where({
+    //   weight: _.gt(70).or(_.eq('74'))
+    // }).get().then(res => {
+    //   console.log(res.data)
+    // })
+
+    fitness.doc('W-gCJHhEiJmghsNT').update({
+      data: { weight: 49 }
+    }).then(res => {
+      console.log(res)
+    }).catch(err => {
+      console.log(err)
+    })
 
   }
 }

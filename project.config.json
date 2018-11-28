@@ -9,5 +9,6 @@
   "compileType": "miniprogram",
   "appid": "wxba0881da5ae1eb51",
   "projectname": "sundries-box",
-  "miniprogramRoot": "./dist"
+  "miniprogramRoot": "./dist",
+  "cloudfunctionRoot": "./functions/"
 }

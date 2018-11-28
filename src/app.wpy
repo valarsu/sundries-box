@@ -10,7 +10,6 @@
 }
 
 </style>
-
 <script>
 import wepy from 'wepy'
 import 'wepy-async-function'
@@ -54,7 +53,7 @@ export default class extends wepy.app {
   }
 
   onLaunch() {
-    this.initCloudService()
+    // this.initCloudService()
   }
 
 
@@ -71,54 +70,5 @@ export default class extends wepy.app {
     })
   }
 
-  // 云开发
-  initCloudService () {
-    // 初始化云服务
-    wx.cloud.init({
-      traceUser: true, 
-      env: 'box-test-2e622d' //指定开发环境
-    })
-
-    this.initCloudDB()
-
-  }
-
-  initCloudDB () {
-    const db = wx.cloud.database({ env: 'box-test-2e622d' })
-    const fitness = db.collection('fitness')
-    
-    // fitness.add({
-    //   data: {
-    //     weight: 70,
-    //     uploadTime: new Date()
-    //   }
-    // })
-    // .then(res => {
-    //   console.log(res)
-    // })
-
-    // db.collection('fitness').doc('W-f8Ttx_Lia3NQgv').get()
-    //   .then(res => {
-    //     console.log(res)
-    //   })
-    // fitness.where({weight: 75}).get().then(res => {
-    //   console.log(res)
-    // })
-    // const _ = db.command
-    // fitness.where({
-    //   weight: _.gt(70).or(_.eq('74'))
-    // }).get().then(res => {
-    //   console.log(res.data)
-    // })
-
-    fitness.doc('W-gCJHhEiJmghsNT').update({
-      data: { weight: 49 }
-    }).then(res => {
-      console.log(res)
-    }).catch(err => {
-      console.log(err)
-    })
-
-  }
 }
 </script>

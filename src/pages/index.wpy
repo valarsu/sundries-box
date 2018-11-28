@@ -39,11 +39,12 @@
         <repeat for="{{item.data}}" key="subIdx" index="subIdx" item="subItem">
           <view class="picker">
             <view>{{subItem.name}}：</view>
-            <input type="number" placeholder="{{subItem.val}}" @input="bindInput">
+            <input type="number" placeholder="{{subItem.val}}" @input="bindInput" />
           </view>
         </repeat>
       </repeat>
       <button type="primary" loading="{{loading}}" plain="{{plain}}" disabled="{{disabled}}" @tap="doClockIn" class="clock-in">锻炼了！</button>
+      <button type="primary" @tap="initCloudService" class="clock-in">云程序！</button>
     </view>
   </view>
 </template>
@@ -136,6 +137,19 @@
       },
       doClockIn: function (e) {
         console.log(this.clockIn[this.currentIdx])
+      },
+      // 云开发
+      initCloudService () {
+        // 初始化云服务
+        wx.cloud.init({
+          traceUser: true, 
+          env: 'box-test-2e622d' //指定开发环境
+        })
+
+        // const db = wx.cloud.database({ env: 'box-test-2e622d' })
+        // const fitness = db.collection('fitness')
+
+
       }
     }
 

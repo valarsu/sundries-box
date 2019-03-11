@@ -40,6 +40,9 @@
 <script>
   import wepy from 'wepy'
   import { artTotal } from '../../utils/atcDetail.js'
+  console.log(artTotal)
+  import {artTotal1} from '../../utils/sss.js'
+  console.log(artTotal1)
 
   export default class ArticleList extends wepy.page {
 

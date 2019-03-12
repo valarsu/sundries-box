@@ -18,12 +18,18 @@
   .pic {
     width: 100%;
   }
+  .rich-text {
+    padding:0 10rpx;
+    box-sizing:border-box;
+    width:100vw;
+    display:block;
+  }
 </style>
 <template>
   <view class="container">
     <!-- 列表 -->
     <view class="detail">
-      <rich-text class="" nodes="{{detail}}"></rich-text>
+      <rich-text class="rich-text" nodes="{{detail}}"></rich-text>
     </view>
   </view>
 </template>
@@ -31,6 +37,7 @@
 <script>
   import wepy from 'wepy'
   import { artList } from '../../utils/atcDetail.js'
+  import { artList2 } from '../../utils/atc2.js'
 
   export default class ArticleDetail extends wepy.page {
 
@@ -55,8 +62,11 @@
 
     onLoad(options) {
       let self = this
+      console.log(options)
       this.atcId = options.atcId
-      this.detail = artList[this.atcId]
+      console.log(this.atcId)
+      let list = artList.concat(artList2)
+      this.detail = list[this.atcId]
     }
   }
 </script>

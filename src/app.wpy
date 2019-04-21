@@ -13,7 +13,7 @@
 <script>
 import wepy from 'wepy'
 import 'wepy-async-function'
-
+import { artList2 } from './utils/atc2.js'
 
 export default class extends wepy.app {
   config = {
@@ -54,9 +54,32 @@ export default class extends wepy.app {
 
   onLaunch() {
     // this.initCloudService()
+    wx.cloud.init({
+      env: 'box-test-2e622d'
+    })
+    // const testDB = wx.cloud.database({
+    //   env: 'box-test-2e622d'
+    // })
+    // let articles = testDB.collection('articles')
+    // console.log(articles.get({
+    //   success(res) {
+    //     console.log(res.data)
+    //   }
+    // }))
+    // artList2.forEach((item, idx) => {
+    //   articles.add({
+    //     data: {
+    //       index: idx,
+    //       detail: item,
+    //       due: new Date()
+    //     }
+    //   })
+    // })
+    // console.log(this.getDBData())
   }
 
-
+  getDBData() {
+  }
   getUserInfo(cb) {
     const that = this
     if (this.globalData.userInfo) {

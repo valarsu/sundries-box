@@ -10,5 +10,5 @@
   "appid": "wxba0881da5ae1eb51",
   "projectname": "sundries-box",
   "miniprogramRoot": "./dist",
-  "cloudfunctionRoot": "./functions/"
+  "cloudfunctionRoot": "./cloudfunctions/"
 }

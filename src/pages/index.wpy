@@ -44,7 +44,7 @@
         </repeat>
       </repeat>
       <button type="primary" loading="{{loading}}" plain="{{plain}}" disabled="{{disabled}}" @tap="doClockIn" class="clock-in">锻炼了！</button>
-      <!-- <button type="primary" @tap="initCloudService" class="clock-in">云程序！</button> -->
+      <button type="primary" @tap="initCloudService" class="clock-in">云程序！</button>
     </view>
   </view>
 </template>

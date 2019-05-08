@@ -4,7 +4,7 @@
   }
   .title {
     padding: 32rpx;
-    color: #697ede;
+    color: #f85415;
     font-size: 32rpx;
     text-align: center;
     margin-bottom: 16px;
@@ -36,8 +36,6 @@
 
 <script>
   import wepy from 'wepy'
-  import { artList } from '../../utils/atcDetail.js'
-  import { artList2 } from '../../utils/atc2.js'
 
   export default class ArticleDetail extends wepy.page {
 
@@ -62,11 +60,20 @@
 
     onLoad(options) {
       let self = this
-      console.log(options)
       this.atcId = options.atcId
-      console.log(this.atcId)
-      let list = artList.concat(artList2)
-      this.detail = list[this.atcId]
+
+      let articles = self.$parent.globalData.testDB.collection('articles')
+      const _ = self.$parent.globalData.testDB.command
+
+      articles
+        .where({
+          _id: _.eq(this.atcId)
+        })
+        .get()
+        .then(res => {
+          this.detail = res.data[0].detail
+          this.$apply()
+        })
     }
   }
 </script>

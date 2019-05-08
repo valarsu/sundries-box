@@ -1,6 +1,6 @@
 <style lang="less">
   .container {
-    background: #697ede;
+    background: #f85415;
   }
   .title {
     padding: 32rpx;
@@ -16,7 +16,7 @@
     border-bottom: 2rpx solid #fff;
     box-sizing: border-box;
     font-size: 28rpx;
-    color: #697ede;
+    color: #f85415;
     padding: 0 32rpx;
     display: flex;
     justify-content: space-between;
@@ -30,7 +30,7 @@
     <!-- 列表 -->
     <block wx:for-items="{{list}}" wx:for-index="index" wx:for-item="item" wx:key="id">
       <view @tap="toDetail('{{item.id}}')" class="mylist">
-        <view>{{item.id + 1}}: {{item.title}}</view>
+        <view>{{item.index + 1}}: 第{{item.index + 1}}章</view>
         <i class="iconfont icon-right"></i>
       </view>
     </block>
@@ -39,8 +39,6 @@
 
 <script>
   import wepy from 'wepy'
-  import { artTotal } from '../../utils/atcDetail.js'
-  import {artTotal2} from '../../utils/atc2.js'
 
   export default class ArticleList extends wepy.page {
 
@@ -49,7 +47,8 @@
     }
     data = {
       normalTitle: '原始标题',
-      list: []
+      list: [],
+      currentPage: 1
     }
 
     computed = {
@@ -68,13 +67,29 @@
 
     onLoad() {
       let self = this
+      let articles = self.$parent.globalData.testDB.collection('articles')
+      console.log(articles.get())
+      const _ = self.$parent.globalData.testDB.command
 
-      for (let idx = 0; idx < (artTotal + artTotal2); ++idx) {
-        this.list.push({
-          id: idx,
-          title: `第（${idx + 1}）章`
+      let start = (this.currentPage - 1) * 20
+      let end = this.currentPage * 20 - 1
+      articles
+        .where({
+          index: _.gte(start).and(_.lte(end))
         })
-      }
+        .orderBy('index', 'asc')
+        .get()
+        .then(res => {
+          let newList = []
+          newList = res.data.map(item => {
+            return {
+              id: item._id,
+              index: item.index
+            }
+          })
+          this.list.push(...newList)
+          this.$apply()
+        })
     }
   }
 </script>

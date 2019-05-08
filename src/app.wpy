@@ -13,7 +13,7 @@
 <script>
 import wepy from 'wepy'
 import 'wepy-async-function'
-import { artList2 } from './utils/atc2.js'
+// import {artList2} from './utils/atc2.js'
 
 export default class extends wepy.app {
   config = {
@@ -24,7 +24,7 @@ export default class extends wepy.app {
     ],
     window: {
       backgroundTextStyle: 'light',
-      navigationBarBackgroundColor: '#697ede',
+      navigationBarBackgroundColor: '#f85415',
       navigationBarTitleText: 'WeChat',
       navigationBarTextStyle: 'white'
     },
@@ -44,7 +44,8 @@ export default class extends wepy.app {
   }
 
   globalData = {
-    userInfo: null
+    userInfo: null,
+    testDB: null
   }
 
   constructor () {
@@ -57,28 +58,47 @@ export default class extends wepy.app {
     wx.cloud.init({
       env: 'box-test-2e622d'
     })
-    // const testDB = wx.cloud.database({
-    //   env: 'box-test-2e622d'
-    // })
-    // let articles = testDB.collection('articles')
+    this.globalData.testDB = wx.cloud.database({
+      env: 'box-test-2e622d'
+    })
     // console.log(articles.get({
     //   success(res) {
     //     console.log(res.data)
     //   }
     // }))
+    // console.log(artList2)
+    // this.globalData.testDB = wx.cloud.database({
+    //   env: 'box-test-2e622d'
+    // })
+    // let articles = this.globalData.testDB.collection('articles')
     // artList2.forEach((item, idx) => {
     //   articles.add({
     //     data: {
-    //       index: idx,
+    //       index: 20 + idx,
     //       detail: item,
     //       due: new Date()
     //     }
     //   })
     // })
     // console.log(this.getDBData())
+    // this.getDBData()
   }
 
   getDBData() {
+
+    // let articles = this.globalData.testDB.collection('articles')
+    // const _ = this.globalData.testDB.command
+    // articles.get().then(res => {
+    //   console.log(res.data)
+    // })
+    // articles
+    //   .where({
+    //     index: _.gte(0).and(_.lte(19))
+    //   })
+    //   .get()
+    //   .then(res => {
+    //     console.log(res.data)
+    //   })
   }
   getUserInfo(cb) {
     const that = this

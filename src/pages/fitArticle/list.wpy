@@ -48,7 +48,8 @@
     data = {
       normalTitle: '原始标题',
       list: [],
-      currentPage: 1
+      currentPage: 1,
+      total: 0
     }
 
     computed = {
@@ -61,14 +62,14 @@
       }
     }
 
-    events = {
-
-    }
-
-    onLoad() {
+    getList(type) {
+      let WX = wx
       let self = this
       let articles = self.$parent.globalData.testDB.collection('articles')
-      console.log(articles.get())
+      articles.count().then(res => {
+        this.total = res.total
+        this.$apply()
+      })
       const _ = self.$parent.globalData.testDB.command
 
       let start = (this.currentPage - 1) * 20
@@ -81,15 +82,48 @@
         .get()
         .then(res => {
           let newList = []
+          if (type && type === 'pullDown') {
+            this.list = []
+          }
           newList = res.data.map(item => {
             return {
               id: item._id,
               index: item.index
             }
           })
+          if (type && type === 'reachBottom') {
+            // 如果是触底操作，先过滤老数据，再push新数据
+            newList.forEach(newItem => {
+              this.list = this.list.filter((item => {
+                return item.id != newItem.id
+              }))
+            })
+            console.log(this.list)
+          }
           this.list.push(...newList)
+          wx.stopPullDownRefresh()
           this.$apply()
         })
+    }
+    events = {
+    }
+
+    onLoad() {
+      this.getList()
+    }
+
+    onPullDownRefresh() {
+      this.currentPage = 1
+      this.getList('pullDown')
+    }
+    onReachBottom() {
+      if (this.currentPage < Math.ceil(this.total / 20)) {
+        this.currentPage ++
+      } else {
+        this.currentPage = Math.ceil(this.total / 20)
+      }
+      console.log(this.currentPage)
+      this.getList('reachBottom')
     }
   }
 </script>

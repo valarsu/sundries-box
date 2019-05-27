@@ -141,10 +141,10 @@
       // 云开发
       initCloudService () {
         // 初始化云服务
-        wx.cloud.init({
-          traceUser: true, 
-          env: 'box-test-2e622d' //指定开发环境
-        })
+        // wx.cloud.init({
+        //   traceUser: true, 
+        //   env: 'he-fd1c48' //指定开发环境
+        // })
 
         // const db = wx.cloud.database({ env: 'box-test-2e622d' })
         // const fitness = db.collection('fitness')

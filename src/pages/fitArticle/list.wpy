@@ -67,42 +67,53 @@
       let self = this
       let articles = self.$parent.globalData.testDB.collection('articles')
       articles.count().then(res => {
-        this.total = res.total
-        this.$apply()
+        self.total = res.total
+        self.$apply()
       })
       const _ = self.$parent.globalData.testDB.command
 
-      let start = (this.currentPage - 1) * 20
-      let end = this.currentPage * 20 - 1
+      let start = (self.currentPage - 1) * 20
+      let end = self.currentPage * 20 - 1
+
+
+      wx.showLoading({
+        title: '加载中',
+      })
       articles
         .where({
           index: _.gte(start).and(_.lte(end))
         })
         .orderBy('index', 'asc')
-        .get()
-        .then(res => {
-          let newList = []
-          if (type && type === 'pullDown') {
-            this.list = []
-          }
-          newList = res.data.map(item => {
-            return {
-              id: item._id,
-              index: item.index
+        .get({
+          success (res) {
+            wx.hideLoading()
+            let newList = []
+            if (type && type === 'pullDown') {
+              self.list = []
             }
-          })
-          if (type && type === 'reachBottom') {
-            // 如果是触底操作，先过滤老数据，再push新数据
-            newList.forEach(newItem => {
-              this.list = this.list.filter((item => {
-                return item.id != newItem.id
-              }))
+            newList = res.data.map(item => {
+              return {
+                id: item._id,
+                index: item.index
+              }
             })
-            console.log(this.list)
+            if (type && type === 'reachBottom') {
+              // 如果是触底操作，先过滤老数据，再push新数据
+              newList.forEach(newItem => {
+                self.list = self.list.filter((item => {
+                  return item.id != newItem.id
+                }))
+              })
+              console.log(self.list)
+            }
+            self.list.push(...newList)
+            wx.stopPullDownRefresh()
+            self.$apply()
+          },
+          fail (err) {
+            wx.hideLoading()
+            console.log(err)
           }
-          this.list.push(...newList)
-          wx.stopPullDownRefresh()
-          this.$apply()
         })
     }
     events = {

@@ -64,6 +64,10 @@
 
       let articles = self.$parent.globalData.testDB.collection('articles')
       const _ = self.$parent.globalData.testDB.command
+      
+      wx.showLoading({
+        title: '加载中',
+      })
 
       articles
         .where({
@@ -71,6 +75,7 @@
         })
         .get()
         .then(res => {
+          wx.hideLoading()
           this.detail = res.data[0].detail
           this.$apply()
         })

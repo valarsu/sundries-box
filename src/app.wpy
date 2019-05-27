@@ -57,10 +57,10 @@ export default class extends wepy.app {
   onLaunch() {
     // this.initCloudService()
     wx.cloud.init({
-      env: 'box-test-2e622d'
+      env: 'he-fd1c48'
     })
     this.globalData.testDB = wx.cloud.database({
-      env: 'box-test-2e622d'
+      env: 'he-fd1c48'
     })
     // console.log(articles.get({
     //   success(res) {
